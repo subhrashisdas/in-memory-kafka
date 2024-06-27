@@ -22,25 +22,23 @@ export class OrchestratorsService {
     this.topics[String(topicName)]?.partitions[String(partition)].push(message);
   }
 
-  getMessages(
-    consumerGroupName: string,
-    consumerId: string,
-    topicName: string,
-  ) {
+  getMessages(topicName: string, consumerName: string) {
     if (!this.topics[topicName]) {
       throw new Error("Topic not found");
     }
 
-    if (!this.topics[topicName].partitionConsumerMapping[consumerId].pointer) {
-      this.topics[topicName].partitionConsumerMapping[consumerId].pointer = {
+    if (
+      !this.topics[topicName].partitionConsumerMapping[consumerName].pointer
+    ) {
+      this.topics[topicName].partitionConsumerMapping[consumerName].pointer = {
         pointer: 1,
         partition: this.topics[topicName].partitionsFree.pop(),
       };
     }
 
     const { pointer, partition } =
-      this.topics[topicName].partitionConsumerMapping[consumerId].pointer;
-    this.topics[topicName].partitionConsumerMapping[consumerId].pointer += 1;
+      this.topics[topicName].partitionConsumerMapping[consumerName].pointer;
+    this.topics[topicName].partitionConsumerMapping[consumerName].pointer += 1;
     return this.topics[topicName].partitions[partition][pointer];
   }
 

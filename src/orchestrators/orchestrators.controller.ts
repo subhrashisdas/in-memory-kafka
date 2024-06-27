@@ -38,9 +38,14 @@ export class OrchestratorsController {
     );
   }
 
-  @Get("topics/:topicName/consumers/:consumerId/messages")
+  @Get("topics/:topicName/consumers/:consumerName/messages")
   @ApiOperation({ summary: "Get messages" })
-  getMessages(@Param("id") id: string) {}
+  getMessages(
+    @Param("topicName") topicName: string,
+    @Param("consumerName") consumerName: string,
+  ) {
+    this.orchestratorService.getMessages(topicName, consumerName);
+  }
 
   @Delete("topics/:topicName/consumers/:consumerId/messages")
   @ApiOperation({ summary: "Delete a consumer group" })
