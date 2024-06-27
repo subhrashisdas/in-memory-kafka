@@ -44,7 +44,7 @@ export class OrchestratorsController {
     @Param("topicName") topicName: string,
     @Param("consumerName") consumerName: string,
   ) {
-    this.orchestratorService.getMessages(topicName, consumerName);
+    return this.orchestratorService.getMessages(topicName, consumerName);
   }
 
   @Delete("topics/:topicName/consumers/:consumerId/messages")

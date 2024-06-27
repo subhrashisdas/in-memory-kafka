@@ -27,17 +27,15 @@ export class OrchestratorsService {
       throw new Error("Topic not found");
     }
 
-    if (
-      !this.topics[topicName].partitionConsumerMapping[consumerName].pointer
-    ) {
-      this.topics[topicName].partitionConsumerMapping[consumerName].pointer = {
-        pointer: 1,
+    if (!this.topics[topicName].partitionConsumerMapping[consumerName]) {
+      this.topics[topicName].partitionConsumerMapping[consumerName] = {
+        pointer: 0,
         partition: this.topics[topicName].partitionsFree.pop(),
       };
     }
 
     const { pointer, partition } =
-      this.topics[topicName].partitionConsumerMapping[consumerName].pointer;
+      this.topics[topicName].partitionConsumerMapping[consumerName];
     this.topics[topicName].partitionConsumerMapping[consumerName].pointer += 1;
     return this.topics[topicName].partitions[partition][pointer];
   }
