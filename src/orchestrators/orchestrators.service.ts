@@ -40,7 +40,16 @@ export class OrchestratorsService {
     return this.topics[topicName].partitions[partition][pointer];
   }
 
-  deleteConsumer() {}
+  deleteConsumer(topicName: string, consumerName: string) {
+    if (!this.topics[topicName].partitionConsumerMapping[consumerName]) {
+      throw Error("Consumer group not found");
+    }
+
+    const { pointer, partition } =
+      this.topics[topicName].partitionConsumerMapping[consumerName];
+    this.topics[topicName].partitionsFree.push(partition);
+    delete this.topics[topicName].partitionConsumerMapping[consumerName];
+  }
 
   debug() {
     return this.topics;

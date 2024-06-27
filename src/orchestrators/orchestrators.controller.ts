@@ -22,7 +22,7 @@ export class OrchestratorsController {
       createTopicDto.topicName,
       createTopicDto.partitions,
     );
-    return this.orchestratorService.debug();
+    return "ok";
   }
 
   @Post("topics/:topicName/messages/")
@@ -36,6 +36,7 @@ export class OrchestratorsController {
       addMessageDto.partition,
       addMessageDto.message,
     );
+    return "ok";
   }
 
   @Get("topics/:topicName/consumers/:consumerName/messages")
@@ -47,11 +48,17 @@ export class OrchestratorsController {
     return this.orchestratorService.getMessages(topicName, consumerName);
   }
 
-  @Delete("topics/:topicName/consumers/:consumerId/messages")
+  @Delete("topics/:topicName/consumers/:consumerId")
   @ApiOperation({ summary: "Delete a consumer group" })
-  deleteConsumer() {}
+  deleteConsumer(
+    @Param("topicName") topicName: string,
+    @Param("consumerName") consumerName: string,
+  ) {
+    return this.orchestratorService.deleteConsumer(topicName, consumerName);
+    return "ok";
+  }
 
-  @Get()
+  @Get("debug")
   debug() {
     return this.orchestratorService.debug();
   }
