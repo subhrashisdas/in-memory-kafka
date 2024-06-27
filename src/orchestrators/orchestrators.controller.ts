@@ -26,7 +26,7 @@ export class OrchestratorsController {
   }
 
   @Post("topics/:topicName/messages/")
-  @ApiOperation({ summary: "Create a new message" })
+  @ApiOperation({ summary: "Add a new message" })
   addMessage(
     @Param("topicName") topicName: string,
     @Body() addMessageDto: AddMessageDto,

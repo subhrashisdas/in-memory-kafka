@@ -2,6 +2,7 @@ import { Injectable } from "@nestjs/common";
 
 @Injectable()
 export class OrchestratorsService {
+
   private topics: any = {};
 
   createTopic(topicName: string, partitions: number) {
@@ -12,6 +13,7 @@ export class OrchestratorsService {
         (_, index) => index,
       ),
       partitions: {},
+      locks: {}
     };
   }
 
@@ -27,6 +29,7 @@ export class OrchestratorsService {
       throw new Error("Topic not found");
     }
 
+    // if locked, throw error, else create a lock
     if (!this.topics[topicName].partitionConsumerMapping[consumerName]) {
       this.topics[topicName].partitionConsumerMapping[consumerName] = {
         pointer: 0,
@@ -37,6 +40,7 @@ export class OrchestratorsService {
     const { pointer, partition } =
       this.topics[topicName].partitionConsumerMapping[consumerName];
     this.topics[topicName].partitionConsumerMapping[consumerName].pointer += 1;
+    // open lock
     return this.topics[topicName].partitions[partition][pointer];
   }
 
