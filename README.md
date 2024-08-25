@@ -1,11 +1,13 @@
-### Swagger sample
+# In-Memory Kafka-like Topic Operations
 
-### Installation
+**Create a Topic:** Define and create a new topic using an admin client or equivalent tool with the desired configuration.
 
-`npm install`
+**Delete a Topic:** Remove an existing topic by specifying its name through an admin client or similar interface.
 
-### Running
+**Send a Message:** Publish messages to a topic using a producer.
 
-Once the application is running you can visit [http://localhost:3000/api](http://localhost:3000/api) to see the Swagger interface.
+**Consume a Message:** Read messages from a topic using a consumer.
 
-See [here](https://docs.nestjs.com/recipes/swagger#bootstrap) for more information.
+## License
+
+© 2024 Subhrashis Das. All rights reserved.
