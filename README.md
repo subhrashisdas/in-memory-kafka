@@ -1,3 +1,11 @@
+<p align="center">
+  <samp>
+    <a href="https://subh.me/">website</a> &middot;
+    <a href="https://www.linkedin.com/in/subhrashisdas/">linkedin</a> &middot;
+    <a href="https://github.com/subhrashisdas/">github</a>
+  </samp>
+</p>
+
 # In-Memory Kafka-like Topic Operations
 
 **Create a Topic:** Define and create a new topic using an admin client or equivalent tool with the desired configuration.
